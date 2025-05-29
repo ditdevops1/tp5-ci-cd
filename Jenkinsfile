@@ -60,6 +60,9 @@ pipeline {
                     
                     # Arrête le conteneur s'il existe
                     docker container stop $DOCKER_CONTAINER || true
+
+                    # supprime le conteneur s'il existe
+                    docker container rm $DOCKER_CONTAINER || true
                 
 
                     # Lance un nouveau conteneur en mode détaché(en arrière-plan )
