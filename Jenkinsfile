@@ -4,10 +4,11 @@ pipeline {
     agent any
 
     // Déclarer les variables d'environnement globales
-    environment {                
-        IMAGE_VERSION       = "1.${BUILD_NUMBER}"        // version dynamique de l’image
-        DOCKER_IMAGE        = "tp-app:${IMAGE_VERSION}" // nom de l’image docker
-        DOCKER_CONTAINER    = "ci-cd-html-css-app"      // nom du conteneur
+    environment {
+        DOCKER_USERNAME = "ditdevops1" // username docker                
+        IMAGE_VERSION = "1.${BUILD_NUMBER}"  // version dynamique de l’image
+        DOCKER_IMAGE = "${DOCKER_USERNAME}/tp-app:${IMAGE_VERSION}" // nom de l’image docker
+        DOCKER_CONTAINER = "ci-cd-html-css-app"  // nom du conteneur
     }
 
     // Les étapes du pipeline
@@ -44,7 +45,7 @@ pipeline {
                     bat """
                     docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
                     echo 'Docker login successful'
-                    docker push $DOCKER_USER/$DOCKER_IMAGE
+                    docker push $DOCKER_IMAGE
                     """
                     }
                 }
